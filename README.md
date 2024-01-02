@@ -1,2 +1,2 @@
 # SiteDeNoticias
-Site feiro com Back-end e Front-end 
+Site feito com Back-end e Front-end 
