@@ -1,14 +1,13 @@
+'use server'
+
 const user = [
   {
     name: 'Miguel',
-    age: 15
+    age: 26
   }
 ]
 
 export default function handler(req, res) {
-    if (req.method === 'GET') {
       res.status(200).json(user)
-    }
-  
   }
   
