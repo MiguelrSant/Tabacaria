@@ -2,15 +2,13 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var postSchema  = new Schema({
-    categoria:String,
-    conteudo:String,
+    preco:Number,
     imagem:String,
     slug:String,
-    titulo:String,
-    autor: String,
+    nome: String,
     views: Number
 },{collection:'posts'})
 
-var Posts = mongoose.model("Posts", postSchema)
+var Produtos = mongoose.model("Produtos", postSchema)
 
-module.exports = Posts
+module.exports = Produtos
