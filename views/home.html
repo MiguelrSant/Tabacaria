@@ -1,15 +1,39 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <h1><%=  produtos[0].nome %></h1>
-    <h1><%=  produtos[0].preco %></h1>
-    <h1><%=  produtos[0].views %></h1>
-    <h1><%=  produtos[0].slug %></h1>
-    <img src="<%=  produtos[0].imagem %>" width="150px">
-</head>
-<body>
+<%- include('partials/head.html') %>
+<section class="img-tabacaria">
+    <div class="text-tabacaria">
+        <img src="https://github.com/MiguelrSant/IMG/blob/main/7dcad465-a83e-427e-80b3-c744bfe27535%201.png?raw=true" alt="">
+        <h1 class="tabaria-text">TABACARIA</h1>
+        <div class="btn-whats">
+            <div class="img-whats">
+                <img  src="https://github.com/MiguelrSant/IMG/blob/main/whatsapp-white.png?raw=true" alt="">
+            </div>
+            <h3>COMPRAR</h3>
+        </div>
+    </div>
+
+</section>
+    <section class="produtos">
+        <h1 class="tabaria-text">Produtos</h1>
+        <div class="card-p">
+            <% for(let i = 0; i < produtos.length; i++) { %>
+
+            <div class="card">
+                <p class="aa"><%=  produtos[i].nome %></p>
+                <div class="img-narga">
+                    <img src="<%=  produtos[i].imagem %>" alt="">
+                </div>
+                <div class="compra">
+                    <p class="preco">R$: <%=  produtos[i].preco %>.00</p>
+                    
+                    <a href="<%=  produtos[i].slug %>" style="text-decoration: none;">
+                        <div class="bt-comprar">
+                            <p>COMPRAR</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </section>
 </body>
 </html>

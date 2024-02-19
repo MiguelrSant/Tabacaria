@@ -1,0 +1,19 @@
+<%- include('partials/head.html') %>
+<body>
+    <section class="produto-single">
+        <div class="single1">
+            <div class="img-single"><img src="<%=  produto.imagem %>" alt=""></div>
+        </div>
+        <div class="single2">
+            <p class="nome-single"><%=  produto.nome %></p>
+            <p class="preco-single">R$: <%=  produto.preco %>.00</p>
+            
+            <a href="https://wa.me/5516993423284?text=Ol%C3%A1,%20eu%20quero%20comprar%20um%20<%=  produto.nome %>" target="_blank" style="text-decoration: none;">
+                <div class="btn-single">
+                    <p>COMPRAR</p>
+                </div>
+            </a>
+        </div>
+    </section>
+</body>
+</html>

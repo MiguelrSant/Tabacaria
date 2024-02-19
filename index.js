@@ -25,6 +25,17 @@ app.use( bodyParser.urlencoded({
     extended: true
 }) )
 
+app.get('/:slug', (req,res)=> {
+    Produtos.findOne({ slug: req.params.slug }).exec(function(err,resposta) {
+        if(resposta != null){
+            res.render('slug',{produto:resposta})
+        }else {
+            res.redirect('/')
+        }
+    })
+
+    
+})
 
 app.get('/', (req,res)=>{
     Produtos.find({}).exec(function(err, produtos){
@@ -34,6 +45,6 @@ app.get('/', (req,res)=>{
 
 
 
-app.listen(5000, ()=> {
+app.listen(3333, ()=> {
     console.log('server rodando')
 })
