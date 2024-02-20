@@ -56,18 +56,17 @@
                 produto: '<%=  produto.nome %>'
             }
 
-            axios.post('/narguile', data)
+            axios.post('/produtos/<%=  produto.nome %>', data)
         .then(function (response) {
             console.log(response);
         })
         .catch(function (error) {
             console.log(error);
         });
-
-            
+        window.location.href = "/carrinho"
         }
 
-
+        
         </script>
 </body>
 </html>

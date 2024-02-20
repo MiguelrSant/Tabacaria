@@ -7,7 +7,7 @@ const app = express()
 
 const Produtos = require('./Produtos.js')
 var session = require('express-session')
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 77760000 }}))
 
 mongoose.connect('mongodb+srv://BancoDeDados:XBrxuYb70m5jnUij@cluster0.le3akws.mongodb.net/Miguel?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true}).then(function(){
     console.log('conectado')
@@ -26,7 +26,7 @@ app.use( bodyParser.urlencoded({
     extended: true
 }) )
 
-app.get('/produto/:slug', (req,res)=> {
+app.get('/produtos/:slug', (req,res)=> {
     Produtos.findOne({ slug: req.params.slug }).exec(function(err,resposta) {
         if(resposta != null){
             res.render('slug',{produto:resposta})
@@ -43,14 +43,15 @@ var carrinho = [
     { quantidade: 1, produto: 'Isqueiro' }
 ]
 
-app.post('/produto/:slug',(req,res)=> {
+app.post('/produtos/:slug',(req,res)=> {
     function prod(pro){
         return pro.produto === req.body.produto
     }
 
     if(carrinho.find(prod) == undefined){
         carrinho.push(req.body)
-        console.log(carrinho)
+        req.session.car = JSON.stringify(carrinho)
+        res.redirect('/carrinho') 
     } else {
         const produtoExQN = carrinho.find(prod).quantidade
         const produtoNewQN = req.body.quantidade
@@ -66,10 +67,14 @@ app.post('/produto/:slug',(req,res)=> {
         var carrinho2 = removeItem(carrinho, 'produto', req.body.produto)
         carrinho2.push(newValue)
         carrinho = carrinho2
-        req.session.car = 'lll'
-        console.log(carrinho)
-        console.log(req.session.car)
+        req.session.car = JSON.stringify(carrinho)
     }
+    res.redirect('/carrinho')
+})
+
+app.get('/carrinho', (req,res) => {
+    console.log(req.session.car)
+    res.render('carrinho', {carrinho: req.session.car})
 })
 
 app.get('/', (req,res)=>{
@@ -78,12 +83,6 @@ app.get('/', (req,res)=>{
     }) 
 })
 
-app.get('/carrinho', (req,res)=>{
-    var car = carrinho
-    console.log(car)
-    res.render('carrinho', {carrinho: car})   
-
-})
 
 
 app.listen(3000, ()=> {
