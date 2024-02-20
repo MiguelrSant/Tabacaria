@@ -1,4 +1,11 @@
 <%- include('partials/head.html') %>
+<body>
     <h1><%= carrinho %></h1>
+    <script>
+        var string = '<%= carrinho %>'
+        var novaString = string.replace(/&#34;/g, '"')
+        var InfoCar = JSON.parse(novaString)
+        console.log(InfoCar)
+    </script>
 </body>
 </html>

@@ -38,10 +38,7 @@ app.get('/produtos/:slug', (req,res)=> {
     
 })
 
-var carrinho = [
-    { quantidade: 1, produto: 'Carvão' },
-    { quantidade: 1, produto: 'Isqueiro' }
-]
+var carrinho = []
 
 app.post('/produtos/:slug',(req,res)=> {
     function prod(pro){
@@ -56,7 +53,7 @@ app.post('/produtos/:slug',(req,res)=> {
         const produtoExQN = carrinho.find(prod).quantidade
         const produtoNewQN = req.body.quantidade
         const newValueQN = produtoExQN + produtoNewQN
-        const newValue =  { quantidade: newValueQN, produto: req.body.produto }
+        const newValue =  { quantidade: newValueQN, produto: req.body.produto, imagem: req.body.imagem, preco: req.body.preco }
         
         console.log(carrinho)
 

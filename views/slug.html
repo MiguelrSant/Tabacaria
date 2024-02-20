@@ -53,7 +53,9 @@
         function add(){
             var data = {
                 quantidade: qnt,
-                produto: '<%=  produto.nome %>'
+                produto: '<%=  produto.nome %>',
+                preco: '<%=  produto.preco %>',
+                imagem: '<%=  produto.imagem %>'
             }
 
             axios.post('/produtos/<%=  produto.nome %>', data)
