@@ -207,6 +207,8 @@ section.produto-single{
             font-size: 12px;
         }
         div.btn-single{
+            user-select: none;
+            cursor: pointer;
             display: flex;
             width: 140px;
             height: 40px;
@@ -219,5 +221,33 @@ section.produto-single{
             border-radius: 5px;
             margin-top: 20px;
         }
+        .btn-add{
+            user-select: none;
+            cursor: pointer;
+            display: flex;
+            width: 140px;
+            height: 40px;
+            background-color: #c4c4c4;
+            color: black;
+            font-family: "KoHo", sans-serif;
+            font-weight: bolder;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 0;
+        }
     }
+}
+
+.qn{
+    display: flex;
+    width: 70px;
+    height: 30px;
+    background-color: red;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    font-size: 20px;
+    user-select: none
 }

@@ -7,13 +7,67 @@
         <div class="single2">
             <p class="nome-single"><%=  produto.nome %></p>
             <p class="preco-single">R$: <%=  produto.preco %>.00</p>
+
+            <div class="qn">
+                <div class="su"  style="cursor: pointer;" onclick="subcar()">-</div>
+                <div class="qnt" id="qnt"></div>
+                <div class="add" style="cursor: pointer;"  onclick="addcar()">+</div>
+            </div>
             
             <a href="https://wa.me/5516993423284?text=Ol%C3%A1,%20eu%20quero%20comprar%20um%20<%=  produto.nome %>" target="_blank" style="text-decoration: none;">
                 <div class="btn-single">
                     <p>COMPRAR</p>
                 </div>
             </a>
+            <div class="btn-add" onclick="add()">
+                <p>ADICIONAR</p>
+            </div>
         </div>
     </section>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var qnt = 1
+
+        document.getElementById('qnt').innerHTML = qnt
+
+        function addcar() {
+            if(qnt == 10){
+                qnt = qnt
+            }else {
+                qnt = qnt + 1
+                document.getElementById('qnt').innerHTML = qnt
+            }
+            
+            
+        }
+
+        function subcar() {
+            if(qnt == 1){
+            } else {
+                qnt = qnt - 1
+                document.getElementById('qnt').innerHTML = qnt
+            }
+        }
+
+
+        function add(){
+            var data = {
+                quantidade: qnt,
+                produto: '<%=  produto.nome %>'
+            }
+
+            axios.post('/narguile', data)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+            
+        }
+
+
+        </script>
 </body>
 </html>

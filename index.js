@@ -7,6 +7,7 @@ const app = express()
 
 const Produtos = require('./Produtos.js')
 var session = require('express-session')
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
 mongoose.connect('mongodb+srv://BancoDeDados:XBrxuYb70m5jnUij@cluster0.le3akws.mongodb.net/Miguel?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true}).then(function(){
     console.log('conectado')
@@ -25,7 +26,7 @@ app.use( bodyParser.urlencoded({
     extended: true
 }) )
 
-app.get('/:slug', (req,res)=> {
+app.get('/produto/:slug', (req,res)=> {
     Produtos.findOne({ slug: req.params.slug }).exec(function(err,resposta) {
         if(resposta != null){
             res.render('slug',{produto:resposta})
@@ -37,14 +38,54 @@ app.get('/:slug', (req,res)=> {
     
 })
 
+var carrinho = [
+    { quantidade: 1, produto: 'Carvão' },
+    { quantidade: 1, produto: 'Isqueiro' }
+]
+
+app.post('/produto/:slug',(req,res)=> {
+    function prod(pro){
+        return pro.produto === req.body.produto
+    }
+
+    if(carrinho.find(prod) == undefined){
+        carrinho.push(req.body)
+        console.log(carrinho)
+    } else {
+        const produtoExQN = carrinho.find(prod).quantidade
+        const produtoNewQN = req.body.quantidade
+        const newValueQN = produtoExQN + produtoNewQN
+        const newValue =  { quantidade: newValueQN, produto: req.body.produto }
+        
+        console.log(carrinho)
+
+        function removeItem(arr, prop, value){
+            return arr.filter(function(i) {return i[prop] !== value })
+        }
+
+        var carrinho2 = removeItem(carrinho, 'produto', req.body.produto)
+        carrinho2.push(newValue)
+        carrinho = carrinho2
+        req.session.car = 'lll'
+        console.log(carrinho)
+        console.log(req.session.car)
+    }
+})
+
 app.get('/', (req,res)=>{
     Produtos.find({}).exec(function(err, produtos){
         res.render('home', {produtos: produtos})   
     }) 
 })
 
+app.get('/carrinho', (req,res)=>{
+    var car = carrinho
+    console.log(car)
+    res.render('carrinho', {carrinho: car})   
+
+})
 
 
-app.listen(3333, ()=> {
+app.listen(3000, ()=> {
     console.log('server rodando')
 })

@@ -196,6 +196,10 @@ section.produto-single div.single2 p.preco-single {
   font-size: 12px;
 }
 section.produto-single div.single2 div.btn-single {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
   display: flex;
   width: 140px;
   height: 40px;
@@ -207,4 +211,36 @@ section.produto-single div.single2 div.btn-single {
   align-items: center;
   border-radius: 5px;
   margin-top: 20px;
+}
+section.produto-single div.single2 .btn-add {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  display: flex;
+  width: 140px;
+  height: 40px;
+  background-color: #c4c4c4;
+  color: black;
+  font-family: "KoHo", sans-serif;
+  font-weight: bolder;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  margin-top: 20px;
+  border: 0;
+}
+
+.qn {
+  display: flex;
+  width: 70px;
+  height: 30px;
+  background-color: red;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  font-size: 20px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }/*# sourceMappingURL=index.css.map */
