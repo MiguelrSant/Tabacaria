@@ -47,8 +47,11 @@ app.post('/produtos/:slug',(req,res)=> {
 
     if(carrinho.find(prod) == undefined){
         carrinho.push(req.body)
+        req.session.car = undefined
         req.session.car = JSON.stringify(carrinho)
-        console.log(carrinho)
+        res.redirect('/carrinho')
+        res.redirect('/:slug')
+        res.redirect('/')
     } else {
         const produtoExQN = carrinho.find(prod).quantidade
         const produtoNewQN = req.body.quantidade
@@ -63,19 +66,25 @@ app.post('/produtos/:slug',(req,res)=> {
         var carrinho2 = removeItem(carrinho, 'produto', req.body.produto)
         carrinho2.push(newValue)
         carrinho = carrinho2
+        req.session.car = undefined
         req.session.car = JSON.stringify(carrinho)
-        console.log(carrinho)
+        res.redirect('/carrinho')
+        res.redirect('/:slug')
+        res.redirect('/')
     }
 })
 
 app.get('/carrinho', (req,res) => {
-
-    Produtos.find({}).exec(function(err, produtos) {
+    
+    Produtos.find({}).exec(function(err, produtos) { 
         var string = req.session.car
+        
         if(string === undefined){
+            console.log(string)
             res.render('carrinho', {carrinho: string, produtos:produtos})
         } else{
             var InfoCar = JSON.parse(string)
+            console.log(InfoCar)
             res.render('carrinho', {carrinho: InfoCar, produtos:produtos})
         }
     })
