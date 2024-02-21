@@ -9,9 +9,7 @@ const Produtos = require('./Produtos.js')
 var session = require('express-session')
 app.use(session(
         { 
-        resave: false,
-        saveUninitialized: true,
-        secret: 'keyboard cat',
+        secret: 'keyboard',
         cookie: {
             maxAge: 77760000 
             }
@@ -48,55 +46,10 @@ app.get('/produtos/:slug', (req,res)=> {
     
 })
 
-var carrinho = []
-
-app.post('/produtos/:slug',(req,res)=> {
-    function prod(pro){
-        return pro.produto === req.body.produto
-    }
-
-    if(carrinho.find(prod) == undefined){
-        carrinho.push(req.body)
-        req.session.car = undefined
-        req.session.car = JSON.stringify(carrinho)
-        res.redirect('/carrinho')
-        res.redirect('/:slug')
-        res.redirect('/')
-    } else {
-        const produtoExQN = carrinho.find(prod).quantidade
-        const produtoNewQN = req.body.quantidade
-        const newValueQN = produtoExQN + produtoNewQN
-        const newValue =  { quantidade: newValueQN, produto: req.body.produto, preco: req.body.preco}
-        
-
-        function removeItem(arr, prop, value){
-            return arr.filter(function(i) {return i[prop] !== value })
-        }
-
-        var carrinho2 = removeItem(carrinho, 'produto', req.body.produto)
-        carrinho2.push(newValue)
-        carrinho = carrinho2
-        req.session.car = undefined
-        req.session.car = JSON.stringify(carrinho)
-        res.redirect('/carrinho')
-        res.redirect('/:slug')
-        res.redirect('/')
-    }
-})
-
 app.get('/carrinho', (req,res) => {
     
-    Produtos.find({}).exec(function(err, produtos) { 
-        var string = req.session.car
-        
-        if(string === undefined){
-            console.log(string)
-            res.render('carrinho', {carrinho: string, produtos:produtos})
-        } else{
-            var InfoCar = JSON.parse(string)
-            console.log(InfoCar)
-            res.render('carrinho', {carrinho: InfoCar, produtos:produtos})
-        }
+    Produtos.find({}).exec(function(err, produtos) {   
+        res.render('carrinho', {produtos:produtos})
     })
 
 })

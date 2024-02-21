@@ -2,7 +2,7 @@
 <body>
     <section class="produto-single">
         <div class="single1">
-            <div class="img-single"></div>
+            <div class="img-single"><img src="<%=  produto.imagem %>" alt=""></div>
         </div>
         <div class="single2">
             <p class="nome-single"><%=  produto.nome %></p>
@@ -26,6 +26,7 @@
     </section>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+
         var qnt = 1
 
         document.getElementById('qnt').innerHTML = qnt
@@ -48,25 +49,62 @@
                 document.getElementById('qnt').innerHTML = qnt
             }
         }
-
+        var carrinho = []
+        var local = JSON.parse(localStorage.getItem("carrinho"))
+        console.log(local)
+        if(local != null){
+            carrinho = local
+        }
 
         function add(){
             var data = {
                 quantidade: qnt,
                 produto: '<%=  produto.nome %>',
                 preco: '<%=  produto.preco %>',
+                imagem: '<%=  produto.imagem %>',
             }
 
-            axios.post('/produtos/<%=  produto.nome %>', data)
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-        window.location.href = '/carrinho'
-        }
+            function prod(pro){
+                return pro.produto === '<%=  produto.nome %>'
+            }
 
+            if(carrinho.find(prod) === undefined){
+                carrinho.push(data)
+                
+                if(localStorage.hasOwnProperty("carrinho")){
+                    localStorage.removeItem("carrinho")
+                    localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                    var local = JSON.parse(localStorage.getItem("carrinho"))
+                    console.log(local)
+                } else{
+                    localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                    var local = JSON.parse(localStorage.getItem("carrinho"))
+                    console.log(local)
+                }
+
+
+
+            } else {
+                const produtoExQN = carrinho.find(prod).quantidade
+                const produtoNewQN = data.quantidade
+                const newValueQN = produtoExQN + produtoNewQN
+                const newValue =  { quantidade: newValueQN, produto: data.produto, preco: data.preco, imagem: data.imagem}
+                
+
+                function removeItem(arr, prop, value){
+                    return arr.filter(function(i) {return i[prop] !== value })
+                }
+
+                var carrinho2 = removeItem(carrinho, 'produto', data.produto)
+                carrinho2.push(newValue)
+                carrinho = carrinho2
+                
+                localStorage.removeItem("carrinho")
+                localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                var local = JSON.parse(localStorage.getItem("carrinho"))
+                console.log(local)
+            }
+        }
         
         </script>
 </body>

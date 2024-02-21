@@ -1,29 +1,11 @@
 <%- include('partials/head.html') %>
 <body>
 
-    <section class="car-prod">
-
-        <% if(carrinho === undefined)  {%>
-            <h1 class="Car-off">O carrinho está vazio</h1>
-        <% } else { %>
-
-            <% for(let i = 0; i < carrinho.length; i++) { %>
-
-                <div class="card-car">
-
-                    <div class="info">
-                        <p style="font-size: 35px; text-transform: uppercase;"><%=  carrinho[i].produto%></p>
-                        <p style="text-transform: uppercase;">Quantidade: <%=  carrinho[i].quantidade %></p>
-                        <p style="text-transform: uppercase;">Preço: R$: <%=  carrinho[i].preco %>.00</p>
-                    </div>
-                </div>
-            <% } %>
-
-        <% } %>
+    <section id="para1" class="car-prod">
 
     </section>
 </section>
-<section class="produtos">
+<section  class="produtos">
     <h1 class="tabaria-text" style="text-align: center;">Produtos</h1>
     <div class="card-p">
         <% for(let i = 0; i < produtos.length; i++) { %>
@@ -31,7 +13,7 @@
         <div class="card">
             <p class="aa"><%=  produtos[i].nome %></p>
             <div class="img-narga">
-                
+                <img src="<%=  produtos[i].imagem %>" alt="">
             </div>
             <div class="compra">
                 <p class="preco">R$: <%=  produtos[i].preco %>.00</p>
@@ -46,5 +28,31 @@
         <% } %>
     </div>
 </section>
+<script>
+    const section = document.getElementById("para1")
+    var car = JSON.parse(localStorage.getItem("carrinho"))
+    console.log(car)
+    if(car.length === 0){
+        section.innerHTML = '<p>O carrinho está vazio</p>'
+    } else {
+        car.map(function(val) {
+            var cont = `
+            <div class="card-car">
+                <div class="img-car">
+                    <img src="${val.imagem}" alt="">
+                </div>
+                <div class="info">
+                    <p style="font-size: 35px; text-transform: uppercase;">${val.produto}</p>
+                    <p style="text-transform: uppercase;">Quantidade: ${val.quantidade}</p>
+                    <p style="text-transform: uppercase;">Preço: R$: ${val.preco}.00</p>
+                </div>
+            </div>`
+
+            section.insertAdjacentHTML('beforeend', cont);
+        })
+
+        }
+
+</script>
 </body>
 </html>
