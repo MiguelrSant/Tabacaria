@@ -50,6 +50,7 @@ app.post('/produtos/:slug',(req,res)=> {
         req.session.car = undefined
         req.session.car = JSON.stringify(carrinho)
         res.redirect('/carrinho')
+        res.redirect('/:slug')
         res.redirect('/')
         console.log(carrinho)
     } else {
@@ -70,6 +71,7 @@ app.post('/produtos/:slug',(req,res)=> {
         req.session.car = JSON.stringify(carrinho)
         console.log(carrinho)
         res.redirect('/carrinho')
+        res.redirect('/:slug')
         res.redirect('/')
     }
 })
