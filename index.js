@@ -47,6 +47,7 @@ app.post('/produtos/:slug',(req,res)=> {
 
     if(carrinho.find(prod) == undefined){
         carrinho.push(req.body)
+        req.session.car = undefined
         req.session.car = JSON.stringify(carrinho)
         res.redirect('/carrinho')
         console.log(carrinho)
@@ -64,6 +65,7 @@ app.post('/produtos/:slug',(req,res)=> {
         var carrinho2 = removeItem(carrinho, 'produto', req.body.produto)
         carrinho2.push(newValue)
         carrinho = carrinho2
+        req.session.car = undefined
         req.session.car = JSON.stringify(carrinho)
         console.log(carrinho)
         res.redirect('/carrinho')
