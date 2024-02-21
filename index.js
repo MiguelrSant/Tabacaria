@@ -7,7 +7,17 @@ const app = express()
 
 const Produtos = require('./Produtos.js')
 var session = require('express-session')
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 77760000 }}))
+app.use(session(
+        { 
+        resave: false,
+        saveUninitialized: true,
+        secret: 'keyboard cat',
+        cookie: {
+            maxAge: 77760000 
+            }
+        }
+        
+    ))
 
 mongoose.connect('mongodb+srv://BancoDeDados:XBrxuYb70m5jnUij@cluster0.le3akws.mongodb.net/Miguel?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true}).then(function(){
     console.log('conectado')
