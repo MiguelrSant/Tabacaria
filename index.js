@@ -65,6 +65,7 @@ app.post('/produtos/:slug',(req,res)=> {
         carrinho2.push(newValue)
         carrinho = carrinho2
         req.session.car = JSON.stringify(carrinho)
+        console.log(carrinho)
         res.redirect('/carrinho')
     }
 })
