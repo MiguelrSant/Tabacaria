@@ -49,9 +49,6 @@ app.post('/produtos/:slug',(req,res)=> {
         carrinho.push(req.body)
         req.session.car = undefined
         req.session.car = JSON.stringify(carrinho)
-        res.redirect('/carrinho')
-        res.redirect('/:slug')
-        res.redirect('/')
         console.log(carrinho)
     } else {
         const produtoExQN = carrinho.find(prod).quantidade
@@ -70,9 +67,6 @@ app.post('/produtos/:slug',(req,res)=> {
         req.session.car = undefined
         req.session.car = JSON.stringify(carrinho)
         console.log(carrinho)
-        res.redirect('/carrinho')
-        res.redirect('/:slug')
-        res.redirect('/')
     }
 })
 
