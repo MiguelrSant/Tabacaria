@@ -244,7 +244,6 @@ section.produto-single{
     display: flex;
     width: 70px;
     height: 30px;
-    background-color: red;
     align-items: center;
     justify-content: space-between;
     padding: 0 5px;
@@ -261,17 +260,18 @@ section.produto-single{
     justify-content: baseline;
     align-items: center;
     padding-top: 100px;
-    padding-bottom: 70px;
+    padding-bottom: 50px;
 }
 .card-car{
     display: flex;
     
-    width: 50vw;
+    width: 45vw;
     max-width: 900px;
     height: 150px;
     margin-bottom: 15px;
     border: 1px solid rgb(194, 194, 194);
     background-color: #0c0c0c;
+    padding-left: 40px;
 }
 
 .img-car{
@@ -293,16 +293,5 @@ section.produto-single{
         padding-top: 7px;
         margin-left: 15px;
         color: white;
-    }
-}
-.delete{
-    display: flex;
-    text-align: center;
-    align-items: center;
-    width: 20%;
-    height: 100%;
-
-    h1{
-        color: rgb(126, 30, 30);
     }
 }

@@ -71,8 +71,12 @@ app.post('/produtos/:slug',(req,res)=> {
 
 app.get('/carrinho', (req,res) => {
     var string = req.session.car
-    var InfoCar = JSON.parse(string)
-    res.render('carrinho', {carrinho: InfoCar})
+    if(string === undefined){
+        res.render('carrinho', {carrinho: string})
+    } else{
+        var InfoCar = JSON.parse(string)
+        res.render('carrinho', {carrinho: InfoCar})
+    }
 })
 
 app.get('/', (req,res)=>{
