@@ -288,4 +288,56 @@ section.produto-single div.single2 .btn-add {
   padding-top: 7px;
   margin-left: 15px;
   color: white;
+}
+
+.delete {
+  display: flex;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+}
+.delete h1 {
+  color: rgb(160, 57, 57);
+  font-size: 15px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.infoGerais {
+  display: flex;
+  width: 45vw;
+  max-width: 900px;
+}
+.infoGerais .total {
+  display: flex;
+  width: 30%;
+  align-items: center;
+}
+.infoGerais .total h2 {
+  font-family: "KoHo", sans-serif;
+  color: white;
+  text-transform: uppercase;
+  font-weight: lighter;
+}
+.infoGerais .btns {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 70%;
+}
+.infoGerais .btns .delete-car {
+  background-color: red;
+  padding: 9px 5px;
+  margin-right: 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: "KoHo", sans-serif;
+}
+.infoGerais .btns .comprar-tudo {
+  background-color: #EEB409;
+  padding: 8px 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: "KoHo", sans-serif;
 }/*# sourceMappingURL=index.css.map */

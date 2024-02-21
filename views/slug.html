@@ -51,7 +51,6 @@
         }
         var carrinho = []
         var local = JSON.parse(localStorage.getItem("carrinho"))
-        console.log(local)
         if(local != null){
             carrinho = local
         }
@@ -60,7 +59,7 @@
             var data = {
                 quantidade: qnt,
                 produto: '<%=  produto.nome %>',
-                preco: '<%=  produto.preco %>',
+                preco: <%=  produto.preco %>,
                 imagem: '<%=  produto.imagem %>',
             }
 
@@ -75,11 +74,11 @@
                     localStorage.removeItem("carrinho")
                     localStorage.setItem("carrinho", JSON.stringify(carrinho))
                     var local = JSON.parse(localStorage.getItem("carrinho"))
-                    console.log(local)
+                    window.location.href = '/carrinho'
                 } else{
                     localStorage.setItem("carrinho", JSON.stringify(carrinho))
                     var local = JSON.parse(localStorage.getItem("carrinho"))
-                    console.log(local)
+                    window.location.href = '/carrinho'
                 }
 
 
@@ -102,7 +101,7 @@
                 localStorage.removeItem("carrinho")
                 localStorage.setItem("carrinho", JSON.stringify(carrinho))
                 var local = JSON.parse(localStorage.getItem("carrinho"))
-                console.log(local)
+                window.location.href = '/carrinho'
             }
         }
         

@@ -31,10 +31,11 @@
 <script>
     const section = document.getElementById("para1")
     var car = JSON.parse(localStorage.getItem("carrinho"))
-    console.log(car)
-    if(car.length === 0){
-        section.innerHTML = '<p>O carrinho está vazio</p>'
+    if(car === null){
+        section.innerHTML = '<h1 style="color: #c4c4c4">O carrinho está vazio! Adicione mais produtos!!</h1>'
     } else {
+        var precoT = [];
+
         car.map(function(val) {
             var cont = `
             <div class="card-car">
@@ -46,12 +47,40 @@
                     <p style="text-transform: uppercase;">Quantidade: ${val.quantidade}</p>
                     <p style="text-transform: uppercase;">Preço: R$: ${val.preco}.00</p>
                 </div>
+                <div class="delete">
+                    <h1>DELETAR PRODUTO</h1>
+                </div>
             </div>`
 
-            section.insertAdjacentHTML('beforeend', cont);
+            section.insertAdjacentHTML('afterbegin', cont);
+            var QNTprco = {total: val.quantidade * val.preco}
+            precoT.push(QNTprco)
         })
-
+            var infoG = `
+                <div class="infoGerais">
+                    <div class="total">
+                        <h2 id="precoTotal">0</h2>
+                    </div>
+                    <div class="btns">
+                        <div class="delete-car" onclick="DeleteCar()"><p>DELETAR CARRINHO</p></div>
+                        <div class="comprar-tudo">COMPRAR TUDO</div>
+                    </div>
+                </div>`
+            section.insertAdjacentHTML('beforeend', infoG)
         }
+
+        function DeleteCar(){
+            localStorage.removeItem("carrinho")
+            window.location.reload()
+        }
+
+        var soma = 0
+        for(var i = 0; i < precoT.length; i++) {
+            soma += precoT[i].total;
+        }
+
+        const precoTotal = document.getElementById("precoTotal")
+        precoTotal.innerHTML = `R$: ${soma}.00`
 
 </script>
 </body>
