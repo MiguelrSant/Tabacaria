@@ -50,12 +50,13 @@ app.post('/produtos/:slug',(req,res)=> {
         req.session.car = undefined
         req.session.car = JSON.stringify(carrinho)
         res.redirect('/carrinho')
+        res.redirect('/')
         console.log(carrinho)
     } else {
         const produtoExQN = carrinho.find(prod).quantidade
         const produtoNewQN = req.body.quantidade
         const newValueQN = produtoExQN + produtoNewQN
-        const newValue =  { quantidade: newValueQN, produto: req.body.produto, preco: req.body.preco, imagem: req.body.imagem}
+        const newValue =  { quantidade: newValueQN, produto: req.body.produto, preco: req.body.preco}
         
 
         function removeItem(arr, prop, value){
@@ -69,17 +70,22 @@ app.post('/produtos/:slug',(req,res)=> {
         req.session.car = JSON.stringify(carrinho)
         console.log(carrinho)
         res.redirect('/carrinho')
+        res.redirect('/')
     }
 })
 
 app.get('/carrinho', (req,res) => {
-    var string = req.session.car
-    if(string === undefined){
-        res.render('carrinho', {carrinho: string})
-    } else{
-        var InfoCar = JSON.parse(string)
-        res.render('carrinho', {carrinho: InfoCar})
-    }
+
+    Produtos.find({}).exec(function(err, produtos) {
+        var string = req.session.car
+        if(string === undefined){
+            res.render('carrinho', {carrinho: string, produtos:produtos})
+        } else{
+            var InfoCar = JSON.parse(string)
+            res.render('carrinho', {carrinho: InfoCar, produtos:produtos})
+        }
+    })
+
 })
 
 app.get('/', (req,res)=>{

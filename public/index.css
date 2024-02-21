@@ -259,26 +259,17 @@ section.produto-single div.single2 .btn-add {
 .card-car {
   display: flex;
   width: 45vw;
-  max-width: 900px;
+  max-width: 500px;
   height: 150px;
-  margin-bottom: 15px;
   border: 1px solid rgb(194, 194, 194);
   background-color: #0c0c0c;
   padding-left: 40px;
-}
-
-.img-car {
-  width: 25%;
-  height: 100%;
-}
-.img-car img {
-  width: 100%;
-  height: 100%;
+  align-items: center;
 }
 
 .info {
-  width: 55%;
-  height: 100%;
+  width: 50%;
+  padding-bottom: 12px;
   display: flex;
   flex-direction: column;
   justify-content: baseline;
@@ -287,5 +278,5 @@ section.produto-single div.single2 .btn-add {
   font-family: "KoHo", sans-serif;
   padding-top: 7px;
   margin-left: 15px;
-  color: #ffffff;
+  color: white;
 }/*# sourceMappingURL=index.css.map */

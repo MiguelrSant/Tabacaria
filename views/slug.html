@@ -55,7 +55,6 @@
                 quantidade: qnt,
                 produto: '<%=  produto.nome %>',
                 preco: '<%=  produto.preco %>',
-                imagem: '<%=  produto.imagem %>'
             }
 
             axios.post('/produtos/<%=  produto.nome %>', data)

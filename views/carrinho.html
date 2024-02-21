@@ -10,9 +10,7 @@
             <% for(let i = 0; i < carrinho.length; i++) { %>
 
                 <div class="card-car">
-                    <div class="img-car">
-                        <img src="<%=  carrinho[i].imagem %>" alt="">
-                    </div>
+
                     <div class="info">
                         <p style="font-size: 35px; text-transform: uppercase;"><%=  carrinho[i].produto%></p>
                         <p style="text-transform: uppercase;">Quantidade: <%=  carrinho[i].quantidade %></p>
@@ -24,5 +22,29 @@
         <% } %>
 
     </section>
+</section>
+<section class="produtos">
+    <h1 class="tabaria-text" style="text-align: center;">Produtos</h1>
+    <div class="card-p">
+        <% for(let i = 0; i < produtos.length; i++) { %>
+
+        <div class="card">
+            <p class="aa"><%=  produtos[i].nome %></p>
+            <div class="img-narga">
+                <img src="<%=  produtos[i].imagem %>" alt="">
+            </div>
+            <div class="compra">
+                <p class="preco">R$: <%=  produtos[i].preco %>.00</p>
+                
+                <a href="/produtos/<%=  produtos[i].slug %>" style="text-decoration: none;">
+                    <div class="bt-comprar">
+                        <p>COMPRAR</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</section>
 </body>
 </html>
