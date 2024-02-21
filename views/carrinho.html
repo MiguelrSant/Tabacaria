@@ -1,11 +1,25 @@
 <%- include('partials/head.html') %>
 <body>
-    <h1><%= carrinho %></h1>
-    <script>
-        var string = '<%= carrinho %>'
-        var novaString = string.replace(/&#34;/g, '"')
-        var InfoCar = JSON.parse(novaString)
-        console.log(InfoCar)
-    </script>
+
+    <section class="car-prod">
+
+        <% for(let i = 0; i < carrinho.length; i++) { %>
+
+            <div class="card-car">
+                <div class="img-car">
+                    <img src="<%=  carrinho[i].imagem %>" alt="">
+                </div>
+                <div class="info">
+                    <p style="font-size: 35px; text-transform: uppercase;"><%=  carrinho[i].produto%></p>
+                    <p style="text-transform: uppercase;">Quantidade: <%=  carrinho[i].quantidade %></p>
+                    <p style="text-transform: uppercase;">Preço: R$: <%=  carrinho[i].preco %>.00</p>
+                </div>
+                <div class="delete">
+                    <h1 style="font-size: 15px; cursor: pointer;">X: REMOVER</h1>
+                </div>
+            </div>
+        <% } %>
+
+    </section>
 </body>
 </html>
