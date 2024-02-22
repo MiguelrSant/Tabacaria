@@ -47,7 +47,7 @@
                     <p style="text-transform: uppercase;">Quantidade: ${val.quantidade}</p>
                     <p style="text-transform: uppercase;">Preço: R$: ${val.preco}.00</p>
                 </div>
-                <div class="delete">
+                <div class="delete delete-btns" id="${val.produto}">
                     <h1>DELETAR PRODUTO</h1>
                 </div>
             </div>`
@@ -63,7 +63,7 @@
                     </div>
                     <div class="btns">
                         <div class="delete-car" onclick="DeleteCar()"><p>DELETAR CARRINHO</p></div>
-                        <div class="comprar-tudo">COMPRAR TUDO</div>
+                        <div class="comprar-tudo"  onclick="btnComprar()">COMPRAR TUDO</div>
                     </div>
                 </div>`
             section.insertAdjacentHTML('beforeend', infoG)
@@ -82,6 +82,55 @@
         const precoTotal = document.getElementById("precoTotal")
         precoTotal.innerHTML = `R$: ${soma}.00`
 
+        function btnComprar(){
+            var items = JSON.parse(localStorage.getItem("carrinho"))
+            var msg = []
+
+            // Juntando os elementos do array com uma vírgula como separador
+            items.map((obj) =>{
+                var nome = (`${obj.quantidade}  ${obj.slug}`)
+                msg.push(nome)
+            });
+        
+            const minhaString = msg.map(obj => obj).join(', ')
+            var mensagem = (`https://wa.me/5516993423284?text=Olá vou querer esse(s) produto(s): ${minhaString}, com o preço total de R$:${soma}.00`)
+            var item1 = mensagem.replace(/ /g, "%20")
+            var item2 = item1.replace(/ã/g, "%C3%A3")
+            
+            var win = window.open(item2, '_blank');
+            win.focus()
+
+        }
+
+        var produtoDeletado = document.getElementsByClassName("delete-btns")
+        for(let i =0; i < produtoDeletado.length; i++){
+            produtoDeletado[i].addEventListener("click", ()=> {
+                var produtoDelect = produtoDeletado[i].id
+                var carrinho = JSON.parse(localStorage.getItem("carrinho"))
+                function prod(pro){
+                    return pro.produto === produtoDelect
+                }
+
+                function removeItem(arr, prop, value){
+                    return arr.filter(function(i) {return i[prop] !== value })
+                }
+
+                var carrinho2 = removeItem(carrinho, 'produto', produtoDelect)
+
+                if(carrinho2.length === 0){
+                    localStorage.removeItem("carrinho")
+                    window.location.reload()
+                } else {
+                    localStorage.removeItem("carrinho")
+                    localStorage.setItem("carrinho", JSON.stringify(carrinho2))
+                    window.location.reload()
+                }
+            })
+        }
+
+
+       
+    
 </script>
 </body>
 </html>

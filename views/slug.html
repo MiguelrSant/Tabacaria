@@ -61,6 +61,7 @@
                 produto: '<%=  produto.nome %>',
                 preco: <%=  produto.preco %>,
                 imagem: '<%=  produto.imagem %>',
+                slug: '<%=  produto.slug %>'
             }
 
             function prod(pro){
@@ -87,7 +88,7 @@
                 const produtoExQN = carrinho.find(prod).quantidade
                 const produtoNewQN = data.quantidade
                 const newValueQN = produtoExQN + produtoNewQN
-                const newValue =  { quantidade: newValueQN, produto: data.produto, preco: data.preco, imagem: data.imagem}
+                const newValue =  { quantidade: newValueQN, produto: data.produto, preco: data.preco, imagem: data.imagem, slug: data.slug}
                 
 
                 function removeItem(arr, prop, value){
