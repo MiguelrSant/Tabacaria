@@ -14,11 +14,11 @@
                 <div class="add" style="cursor: pointer;"  onclick="addcar()">+</div>
             </div>
             
-            <a href="https://wa.me/5516993423284?text=Ol%C3%A1,%20eu%20quero%20comprar%20um%20<%=  produto.nome %>" target="_blank" style="text-decoration: none;">
-                <div class="btn-single">
-                    <p>COMPRAR</p>
-                </div>
-            </a>
+            
+            <div onclick="linkWhats()" class="btn-single">
+                <p>COMPRAR</p>
+            </div>
+
             <div class="btn-add" onclick="add()">
                 <p>ADICIONAR</p>
             </div>
@@ -49,6 +49,11 @@
                 document.getElementById('qnt').innerHTML = qnt
             }
         }
+
+        function linkWhats(){
+            window.open(`https://wa.me/5516993423284?text=Ol%C3%A1,%20eu%20quero%20comprar%20${qnt}%20<%=  produto.nome %>%20`)
+        }
+
         var carrinho = []
         var local = JSON.parse(localStorage.getItem("carrinho"))
         if(local != null){

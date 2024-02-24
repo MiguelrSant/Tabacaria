@@ -35,6 +35,11 @@ header {
   align-items: center;
   padding: 0 15%;
 }
+@media screen and (max-width: 960px) {
+  .max-header {
+    padding: 0 5%;
+  }
+}
 .max-header .logo {
   width: 50px;
   height: 50px;
@@ -43,10 +48,15 @@ header {
   width: 50px;
   height: 50px;
 }
-.max-header .carrinho h2 > a {
+.max-header .carrinho a {
   color: white;
   text-decoration: none;
   font-family: "KoHo", sans-serif;
+}
+.max-header .carrinho a img {
+  margin-top: 3px;
+  width: 42px;
+  height: 42px;
 }
 
 .img-tabacaria {
@@ -57,6 +67,12 @@ header {
   overflow: hidden;
   background-size: contain;
   background-repeat: no-repeat;
+}
+@media screen and (max-width: 960px) {
+  .img-tabacaria {
+    height: 100%;
+    max-height: 700px;
+  }
 }
 .img-tabacaria img {
   filter: grayscale(100%);
@@ -72,6 +88,16 @@ header {
   color: white;
   font-size: 60px;
   opacity: 100%;
+}
+@media screen and (max-width: 960px) {
+  .img-tabacaria h1.tabaria-text {
+    font-size: 50px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .img-tabacaria h1.tabaria-text {
+    font-size: 40px;
+  }
 }
 .img-tabacaria .btn-whats {
   position: absolute;
@@ -104,7 +130,7 @@ section.produtos {
   margin: 0 auto;
   max-width: 1500px;
   width: 100%;
-  height: 600px;
+  padding-bottom: 50px;
 }
 section.produtos h1 {
   color: #EEB409;
@@ -114,11 +140,17 @@ section.produtos h1 {
 section.produtos div.card-p {
   display: flex;
   width: 100%;
-  max-width: 1500px;
-  height: 440px;
+  max-width: 1440px;
   padding: 0 100px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 663px) {
+  section.produtos div.card-p {
+    padding: 0 10px;
+    justify-content: space-evenly;
+  }
 }
 section.produtos div.card-p .card {
   display: flex;
@@ -128,6 +160,20 @@ section.produtos div.card-p .card {
   border: 1px solid white;
   padding: 10px 0;
   color: white;
+  margin-bottom: 15px;
+  margin-left: 5px;
+}
+@media screen and (max-width: 663px) {
+  section.produtos div.card-p .card {
+    width: 190px;
+    height: 380px;
+  }
+}
+@media screen and (max-width: 400px) {
+  section.produtos div.card-p .card {
+    width: 270px;
+    height: 410px;
+  }
 }
 section.produtos div.card-p .card p.aa {
   font-family: "KoHo", sans-serif;
@@ -163,37 +209,87 @@ section.produtos div.card-p .card div.bt-comprar {
   align-items: center;
   margin-left: 10px;
 }
+@media screen and (max-width: 663px) {
+  section.produtos div.card-p .card div.bt-comprar {
+    width: 120px;
+    height: 30px;
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 400px) {
+  section.produtos div.card-p .card div.bt-comprar {
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
 
 section.produto-single {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   max-width: 1440px;
   width: 100%;
   height: 650px;
   margin: 0 auto;
+  padding: 0 5%;
+}
+@media screen and (max-width: 663px) {
+  section.produto-single {
+    width: 100%;
+    flex-direction: column;
+    padding: 0 10px;
+    height: 900px;
+    justify-content: center;
+  }
 }
 section.produto-single div.single1 {
-  width: 50%;
-  height: 650px;
+  width: 450px;
+  height: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+@media screen and (max-width: 663px) {
+  section.produto-single div.single1 {
+    padding-top: 150px;
+    margin-bottom: 50px;
+    width: 100%;
+  }
+}
 section.produto-single div.single1 div.img-single {
-  width: 500px;
-  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+@media screen and (max-width: 663px) {
+  section.produto-single div.single1 div.img-single {
+    max-width: 450px;
+  }
 }
 section.produto-single div.single1 div.img-single img {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  max-height: 450px;
+  background-color: #2F2F2F;
 }
 section.produto-single div.single2 {
-  width: 50%;
-  height: 650px;
+  width: 450px;
+  height: 450px;
   display: flex;
-  flex-direction: column;
+  align-items: baseline;
   justify-content: center;
+  flex-direction: column;
   padding-left: 70px;
   color: white;
+}
+@media screen and (max-width: 663px) {
+  section.produto-single div.single2 {
+    margin-top: 20px;
+    padding-left: 20px;
+    width: 100%;
+    height: 250px;
+  }
 }
 section.produto-single div.single2 p.nome-single {
   font-family: "KoHo", sans-serif;
@@ -260,19 +356,27 @@ section.produto-single div.single2 .btn-add {
   margin: 0 auto;
   justify-content: baseline;
   align-items: center;
+  padding: 0 15px;
   padding-top: 100px;
   padding-bottom: 50px;
 }
 
 .card-car {
   display: flex;
-  width: 45vw;
-  max-width: 900px;
+  max-width: 700px;
+  width: 100%;
   height: 150px;
   margin-bottom: 15px;
   border: 1px solid rgb(194, 194, 194);
   background-color: #0c0c0c;
   padding-left: 40px;
+}
+@media screen and (max-width: 1061px) {
+  .card-car {
+    padding-left: 0;
+    max-width: 700px;
+    width: 100%;
+  }
 }
 
 .img-car {
@@ -289,13 +393,30 @@ section.produto-single div.single2 .btn-add {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: baseline;
+  justify-content: center;
+}
+@media screen and (max-width: 479px) {
+  .info {
+    width: 45%;
+  }
 }
 .info p {
   font-family: "KoHo", sans-serif;
   padding-top: 7px;
   margin-left: 15px;
   color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 479px) {
+  .info p {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 417px) {
+  .info p {
+    font-size: 15px;
+  }
 }
 
 .delete {
@@ -311,11 +432,21 @@ section.produto-single div.single2 .btn-add {
   padding: 5px;
   cursor: pointer;
 }
+@media screen and (max-width: 479px) {
+  .delete h1 {
+    font-size: 13px;
+  }
+}
 
 .infoGerais {
   display: flex;
-  width: 45vw;
-  max-width: 900px;
+  max-width: 700px;
+  width: 100%;
+}
+@media screen and (max-width: 479px) {
+  .infoGerais h2#precoTotal {
+    font-size: 19px;
+  }
 }
 .infoGerais .total {
   display: flex;
@@ -333,6 +464,11 @@ section.produto-single div.single2 .btn-add {
   justify-content: end;
   align-items: center;
   width: 70%;
+}
+@media screen and (max-width: 479px) {
+  .infoGerais .btns {
+    font-size: 15px;
+  }
 }
 .infoGerais .btns .delete-car {
   background-color: red;

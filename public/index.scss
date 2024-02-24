@@ -1,3 +1,82 @@
+$container-xl: 1440px;
+$container-l: 1140px;
+$container-m: 960px;
+$container-s: 540px;
+
+
+@mixin responsive($device) {
+    @if $device == xl {
+      // For resolutions upper 1440px
+      @media screen and (min-width: $container-xl) {
+        @content;
+      }
+    } @else if $device == l {
+      // For resolutions between 1140px and 1440px
+      @media screen and (max-width: $container-xl) and (min-width: $container-l) {
+        @content;
+      }
+    } @else if $device == m {
+      // For resolutions between 960px and 1440px
+      @media screen and (max-width: $container-l) and (min-width: $container-s) {
+        @content;
+      }
+    } @else if $device == s {
+      // For resolutions less than 960px
+      @media screen and (max-width: $container-m) {
+        @content;
+      }
+    } @else if $device == xs {
+      // For resolutions less than 540px
+      @media screen and (max-width: $container-s) {
+        @content;
+      }
+    } @else if $device == a{
+        // For resolutions less than 540px
+        @media screen and (max-width: 663px) {
+          @content;
+        }
+    }
+    @else if $device == as{
+        // For resolutions less than 540px
+        @media screen and (max-width: 826px) {
+          @content;
+        }
+    }
+    @else if $device == ass{
+        // For resolutions less than 540px
+        @media screen and (max-width: 320px) {
+          @content;
+        }
+    }
+    @else if $device == asss{
+        // For resolutions less than 540px
+        @media screen and (max-width: 400px) {
+          @content;
+        }
+    }
+    @else if $device == car{
+        // For resolutions less than 540px
+        @media screen and (max-width: 1061px) {
+          @content;
+        }
+    }@else if $device == car2{
+        // For resolutions less than 540px
+        @media screen and (max-width: 479px) {
+          @content;
+        }
+    }
+    @else if $device == car3{
+        // For resolutions less than 540px
+        @media screen and (max-width: 417px) {
+          @content;
+        }
+    }
+    
+  }
+
+
+
+
 *{
     margin:0;
     padding:0;
@@ -34,6 +113,11 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 0 15%;
+    
+    @include responsive(s){
+        padding: 0 5%;
+
+    }
 
     .logo{
         width: 50px;
@@ -44,10 +128,16 @@ header{
             height: 50px;
         }
     }
-    .carrinho h2 > a{
+    .carrinho  a{
         color: white;
         text-decoration: none;
         font-family: "KoHo", sans-serif;
+
+        img{
+            margin-top: 3px;
+            width: 42px;
+            height: 42px;
+        }
     }
 }
 
@@ -59,7 +149,10 @@ header{
     overflow: hidden;
     background-size: contain;
     background-repeat: no-repeat;
-
+    @include responsive(s){
+        height: 100%;
+        max-height: 700px;
+    }
     img{
      -webkit-filter: grayscale(100%); filter: grayscale(100%); filter: gray; 
      width: 100vw;
@@ -75,6 +168,14 @@ header{
         color: white;
         font-size: 60px;
         opacity: 100%;
+        @include responsive(s){
+            font-size: 50px;
+            
+        }
+        @include responsive(ass){
+            font-size: 40px;
+            
+        }
     }
     .btn-whats{
         position: absolute;
@@ -109,7 +210,7 @@ section.produtos{
     margin: 0 auto;
     max-width: 1500px;
     width: 100%;
-    height: 600px;
+    padding-bottom: 50px;
 
     h1{
         color: #EEB409;
@@ -119,12 +220,16 @@ section.produtos{
     div.card-p{
         display: flex;
         width: 100%;
-        max-width: 1500px;
-        height: 440px;
+        max-width: 1440px;
         padding: 0 100px;
         align-items: center;
-        justify-content: space-between;
-
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        @include responsive(a){
+            padding: 0 10px;
+            justify-content: space-evenly;
+            
+        }
         .card{
             display: flex;
             flex-direction: column;
@@ -133,7 +238,19 @@ section.produtos{
             border: 1px solid white;
             padding: 10px 0;
             color: white;
+            margin-bottom: 15px;
+            margin-left: 5px;
 
+            @include responsive(a){
+                width: 190px;
+                height: 380px;
+                
+            }
+            @include responsive(asss){
+                width: 270px;
+                height:410px;
+        
+            }
 
             p.aa{
                 font-family: "KoHo", sans-serif;
@@ -168,6 +285,18 @@ section.produtos{
                 justify-content: center;
                 align-items: center;
                 margin-left: 10px;
+
+                @include responsive(a){
+                    width: 120px;
+                    height: 30px;
+                    font-size: 15px;
+                }
+                @include responsive(asss){
+                    width: 150px;
+                    height: 50px;
+                    font-size: 20px;
+            
+                }
             }
         }
 
@@ -176,36 +305,65 @@ section.produtos{
 
 section.produto-single{
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     max-width: 1440px;
     width: 100%;
     height: 650px;
     margin: 0 auto;
+    padding: 0 5%;
+
+    @include responsive(a){
+        width: 100%;
+        flex-direction: column;
+        padding: 0 10px;
+        height: 900px;
+        justify-content: center;
+    }
 
     div.single1{
-        width: 50%;
-        height: 650px; 
+        width: 450px;
+        height: 450px;
         display: flex;
         justify-content: center;
         align-items: center;
+        @include responsive(a){
+            padding-top: 150px;
+            margin-bottom: 50px;
+            width: 100%;
+        }
         div.img-single{
-            width: 500px;
-            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            @include responsive(a){
+                max-width: 450px;
+            }
             img{
-                width: 500px;
-                height: 500px;
+                width: 100%;
+                max-height: 450px;
+                background-color: #2F2F2F;
+                
             }
 
         }
     }
     div.single2{
-        width: 50%;
-        height: 650px; 
+        width: 450px;
+        height: 450px;
         display: flex;
-        flex-direction: column;
+        align-items: baseline;
         justify-content: center;
+        flex-direction: column;
         padding-left: 70px;
         color: white;
-
+        @include responsive(a){
+            margin-top: 20px;
+            padding-left: 20px;
+            width: 100%;
+            height: 250px;
+        }
         p.nome-single{
             font-family: "KoHo", sans-serif;
             font-size: 50px;
@@ -267,19 +425,25 @@ section.produto-single{
     margin: 0 auto;
     justify-content: baseline;
     align-items: center;
+    padding: 0 15px;
     padding-top: 100px;
     padding-bottom: 50px;
 }
 .card-car{
-    display: flex;
-    
-    width: 45vw;
-    max-width: 900px;
+    display: flex;  
+    max-width: 700px;
+    width: 100%;
     height: 150px;
     margin-bottom: 15px;
     border: 1px solid rgb(194, 194, 194);
     background-color: #0c0c0c;
     padding-left: 40px;
+
+    @include responsive(car){
+        padding-left: 0;
+        max-width: 700px;
+        width: 100%;
+    }
 }
 
 .img-car{
@@ -295,12 +459,24 @@ section.produto-single{
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: baseline;
+    justify-content: center;
+    @include responsive(car2){
+        width: 45%;
+    }
     p{
         font-family: "KoHo", sans-serif;
         padding-top: 7px;
         margin-left: 15px;
         color: white;
+        font-size: 20px; 
+        text-transform: uppercase;
+
+        @include responsive(car2){
+            font-size: 18px;
+        }
+        @include responsive(car3){
+            font-size: 15px;
+        }
     }
 }
 .delete{
@@ -314,12 +490,22 @@ section.produto-single{
         font-size: 15px;
         padding: 5px;
         cursor: pointer;
+        @include responsive(car2){
+            font-size: 13px;
+        }
+
     }
 }
 .infoGerais{
     display: flex;
-    width: 45vw;
-    max-width: 900px;
+    max-width: 700px;
+    width: 100%;
+    @include responsive(car2){
+        h2#precoTotal{
+            font-size: 19px;
+        }
+    }
+    
     
     .total{
         display: flex;
@@ -337,6 +523,10 @@ section.produto-single{
         justify-content: end;
         align-items: center;
         width: 70%;
+
+        @include responsive(car2){
+            font-size: 15px;
+        }
         .delete-car{
             background-color: red;
             padding: 9px 5px;
