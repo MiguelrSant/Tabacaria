@@ -282,6 +282,9 @@ section.produtos{
             div.img-narga{
                 width: 100%;
                 height: 110%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 @include responsive(prod1){
                     width: 74%;
                     height: 94%;
@@ -291,6 +294,8 @@ section.produtos{
                 img{
                     width: 100%;
                     height: 100%;
+                    min-width: 185px;
+                    min-height: 185px;
                     max-height: 190px;
                     max-width: 190px;
                 }
@@ -353,13 +358,17 @@ section.produto-single{
             justify-content: center;
             align-items: center;
             width: 100%;
+            height: 80%;
+            min-height: 370px;
+            background-color: #2F2F2F;
             @include responsive(a){
                 max-width: 450px;
             }
             img{
-                width: 100%;
+                width: 90%;
+                height: 80%;
                 max-height: 450px;
-                background-color: #2F2F2F;
+                
                 
             }
 
