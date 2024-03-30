@@ -24,8 +24,103 @@
             </div>
         </div>
     </section>
+
+    <section class="produtos" >
+        <h1 class="tabaria-text"  style="text-align: center;">Mais vendidos</h1>
+        <div class="card-p">
+            <% for(let i = 0; i < produtosTop.length; i++) { %>
+    
+            <div class="card" style=" background-color: rgb(20, 20, 20); border-radius: 10px;">
+                <p class="aa"><%=  produtosTop[i].nome %></p>
+                <div class="img-narga">
+                    <img src="<%=  produtosTop[i].imagem %>" alt="">
+                </div>
+                <div class="compra">
+                    <p class="preco">R$: <%=  produtosTop[i].preco %>.00</p>
+                    
+                    <a href="/produtos/<%=  produtosTop[i].slug %>" style="text-decoration: none;">
+                        <div class="bt-comprar">
+                            <p>COMPRAR</p>
+                        </div>
+                    </a>
+    
+                    <div class="btn-add" >
+                        <p style="padding: 10px;" class="btn-ouvidor" id=' { "nome": "<%=  produtosTop[i].nome %>", "slug": "<%= produtosTop[i].slug %>", "imagem": "<%=  produtosTop[i].imagem %>", "preco": <%=  produtosTop[i].preco %> }'>ADICIONAR</p>
+                    </div>
+    
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </section>
+    
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+
+var carrinho = []
+        var local = JSON.parse(localStorage.getItem("carrinho"))
+        if(local != null){
+            carrinho = local
+        }
+
+        const elementosAdd = window.document.getElementsByClassName("btn-ouvidor")
+        for(var i = 0; i < elementosAdd.length; i++){
+            elementosAdd[i].addEventListener("click", function(){
+                var item = (JSON.parse(event.target.id))
+
+                window.alert(`O produto ${item.nome} foi adicionado no carrinho`)
+
+                var data = {
+                    quantidade: 1,
+                    produto: item.nome,
+                    preco: item.preco,
+                    imagem: item.imagem,
+                    slug: item.slug
+                }
+
+                function prod(pro){
+                    return pro.produto === item.nome
+                }
+
+                if(carrinho.find(prod) === undefined){
+                    carrinho.push(data)
+                    
+                    if(localStorage.hasOwnProperty("carrinho")){
+                        localStorage.removeItem("carrinho")
+                        localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                        var local = JSON.parse(localStorage.getItem("carrinho"))
+                    } else{
+                        localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                        var local = JSON.parse(localStorage.getItem("carrinho"))
+                    }
+
+
+
+                } else {
+                    const produtoExQN = carrinho.find(prod).quantidade
+                    const produtoNewQN = data.quantidade
+                    const newValueQN = produtoExQN + produtoNewQN
+                    const newValue =  { quantidade: newValueQN, produto: data.produto, preco: data.preco, imagem: data.imagem, slug: data.slug}
+                    
+
+                    function removeItem(arr, prop, value){
+                        return arr.filter(function(i) {return i[prop] !== value })
+                    }
+
+                    var carrinho2 = removeItem(carrinho, 'produto', data.produto)
+                    carrinho2.push(newValue)
+                    carrinho = carrinho2
+                    
+                    localStorage.removeItem("carrinho")
+                    localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                    var local = JSON.parse(localStorage.getItem("carrinho"))
+                }
+
+
+            })
+        }
+      
+        
 
         var qnt = 1
 

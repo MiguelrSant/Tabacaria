@@ -1,0 +1,99 @@
+<%- include('partials/head.html') %>
+
+
+    <section class="produtos" style="margin-top: 70px;">
+        <h1 class="tabaria-text" style="text-align: center;"></h1>
+        <div class="card-p">
+            <% for(let i = 0; i < produtos.length; i++) { %>
+
+            <div class="card">
+                <p class="aa"><%=  produtos[i].nome %></p>
+                <div class="img-narga">
+                    <img src="<%=  produtos[i].imagem %>" alt="">
+                </div>
+                <div class="compra">
+                    <p class="preco">R$: <%=  produtos[i].preco %>.00</p>
+                    
+                    <a href="/produtos/<%=  produtos[i].slug %>" style="text-decoration: none;">
+                        <div class="bt-comprar">
+                            <p>COMPRAR</p>
+                        </div>
+                    </a>
+
+                    <div class="btn-add" >
+                        <p style="padding: 10px;" class="btn-ouvidor" id=' { "nome": "<%=  produtos[i].nome %>", "slug": "<%= produtos[i].slug %>", "imagem": "<%=  produtos[i].imagem %>", "preco": <%=  produtos[i].preco %> }'>ADICIONAR</p>
+                    </div>
+
+                </div>
+            </div>
+            <% } %>
+
+            <script>
+                var carrinho = []
+               var local = JSON.parse(localStorage.getItem("carrinho"))
+               if(local != null){
+                   carrinho = local
+               }
+       
+               const elementosAdd = window.document.getElementsByClassName("btn-ouvidor")
+               for(var i = 0; i < elementosAdd.length; i++){
+                   elementosAdd[i].addEventListener("click", function(){
+                       var item = (JSON.parse(event.target.id))
+       
+                       window.alert(`O produto ${item.nome} foi adicionado no carrinho`)
+       
+                       var data = {
+                           quantidade: 1,
+                           produto: item.nome,
+                           preco: item.preco,
+                           imagem: item.imagem,
+                           slug: item.slug
+                       }
+       
+                       function prod(pro){
+                           return pro.produto === item.nome
+                       }
+       
+                       if(carrinho.find(prod) === undefined){
+                           carrinho.push(data)
+                           
+                           if(localStorage.hasOwnProperty("carrinho")){
+                               localStorage.removeItem("carrinho")
+                               localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                               var local = JSON.parse(localStorage.getItem("carrinho"))
+                           } else{
+                               localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                               var local = JSON.parse(localStorage.getItem("carrinho"))
+                           }
+       
+       
+       
+                       } else {
+                           const produtoExQN = carrinho.find(prod).quantidade
+                           const produtoNewQN = data.quantidade
+                           const newValueQN = produtoExQN + produtoNewQN
+                           const newValue =  { quantidade: newValueQN, produto: data.produto, preco: data.preco, imagem: data.imagem, slug: data.slug}
+                           
+       
+                           function removeItem(arr, prop, value){
+                               return arr.filter(function(i) {return i[prop] !== value })
+                           }
+       
+                           var carrinho2 = removeItem(carrinho, 'produto', data.produto)
+                           carrinho2.push(newValue)
+                           carrinho = carrinho2
+                           
+                           localStorage.removeItem("carrinho")
+                           localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                           var local = JSON.parse(localStorage.getItem("carrinho"))
+                       }
+       
+       
+                   })
+               }
+             
+               
+           </script>
+
+</body>
+</html>

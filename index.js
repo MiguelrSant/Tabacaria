@@ -35,14 +35,17 @@ app.use( bodyParser.urlencoded({
 }) )
 
 app.get('/produtos/:slug', (req,res)=> {
-    Produtos.findOneAndUpdate({slug: req.params.slug}, {$inc : {views: 1}}, {new: true}, function(err,resposta) {
-        console.log(resposta)
-        if(resposta != null){
-            res.render('slug',{produto:resposta})
-        }else {
-            res.redirect('/')
-        }
+    Produtos.find({}).sort({'views': -1}).limit(5).exec(function (err, produtosTop) {
+        Produtos.findOneAndUpdate({slug: req.params.slug}, {$inc : {views: 1}}, {new: true}, function(err,resposta) {
+            console.log(resposta)
+            if(resposta != null){
+                res.render('slug',{produto:resposta, produtosTop:produtosTop})
+            }else {
+                res.redirect('/')
+            }
+        })
     })
+
 
     
 })
@@ -53,22 +56,34 @@ app.get('/busca/', (req,res)=> {
         })
 })
 
+app.get('/categoria/:slug', (req, res)=> {
+    Produtos.find({nome: {$regex: req.params.slug,$options:"i"}}).exec(function(err, produtos){
+        res.render('categoria', {produtos:produtos})
+    })
+    
+})
+
+
 app.get('/carrinho', (req,res) => {
     
     Produtos.find({}).exec(function(err, produtos) {   
-        res.render('carrinho', {produtos:produtos})
+        Produtos.find({}).sort({'views': -1}).limit(5).exec(function (err, produtosTop) {
+            res.render('carrinho', {produtos:produtos, produtosTop: produtosTop})
+        })
+        
     })
 
 })
 
 app.get('/', (req,res)=>{
-        Produtos.find({nome: {$regex: 'Vape',$options:"i"}}).limit(5).exec(function(err, vapes){
-            Produtos.find({nome: {$regex: 'Isqueiro',$options:"i"}}).limit(5).exec(function(err, isquerio){
-                res.render('home', { vapes:vapes, isquerio: isquerio})  
+        Produtos.find({}).sort({'views': -1}).limit(5).exec(function (err, produtosTop) {
+            Produtos.find({}).sort({'_id': -1}).limit(5).exec(function(err, novos) {
+                res.render('home', { novos:novos, produtosTop: produtosTop}) 
             })
+            
         })
-         
-})
+    })
+
 
 var users = {
         login: 'Miguel',
@@ -122,6 +137,7 @@ app.get('/admin/painel', (req,res)=> {
         
     }
 })
+
 
 
 app.listen(3000, ()=> {

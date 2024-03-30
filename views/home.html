@@ -16,27 +16,27 @@
 
 </section>
 
-    <section class="produtos">
-        <h1 class="tabaria-text">Vapes</h1>
+    <section class="produtos" style="background-color: rgb(27, 27, 27);">
+        <h1 class="tabaria-text"  style="text-align: center;">Mais vendidos</h1>
         <div class="card-p">
-            <% for(let i = 0; i < vapes.length; i++) { %>
+            <% for(let i = 0; i < produtosTop.length; i++) { %>
 
-            <div class="card">
-                <p class="aa"><%=  vapes[i].nome %></p>
+            <div class="card" style=" background-color: rgb(20, 20, 20); border-radius: 10px;">
+                <p class="aa"><%=  produtosTop[i].nome %></p>
                 <div class="img-narga">
-                    <img src="<%=  vapes[i].imagem %>" alt="">
+                    <img src="<%=  produtosTop[i].imagem %>" alt="">
                 </div>
                 <div class="compra">
-                    <p class="preco">R$: <%=  vapes[i].preco %>.00</p>
+                    <p class="preco">R$: <%=  produtosTop[i].preco %>.00</p>
                     
-                    <a href="/produtos/<%=  vapes[i].slug %>" style="text-decoration: none;">
+                    <a href="/produtos/<%=  produtosTop[i].slug %>" style="text-decoration: none;">
                         <div class="bt-comprar">
                             <p>COMPRAR</p>
                         </div>
                     </a>
 
                     <div class="btn-add" >
-                        <p style="padding: 10px;" class="btn-ouvidor" id=' { "nome": "<%=  vapes[i].nome %>", "slug": "<%= vapes[i].slug %>", "imagem": "<%=  vapes[i].imagem %>", "preco": <%=  vapes[i].preco %> }'>ADICIONAR</p>
+                        <p style="padding: 10px;" class="btn-ouvidor" id=' { "nome": "<%=  produtosTop[i].nome %>", "slug": "<%= produtosTop[i].slug %>", "imagem": "<%=  produtosTop[i].imagem %>", "preco": <%=  produtosTop[i].preco %> }'>ADICIONAR</p>
                     </div>
 
                 </div>
@@ -44,27 +44,28 @@
             <% } %>
         </div>
     </section>
-    <section class="produtos">
-        <h1 class="tabaria-text">Isqueiro</h1>
-        <div class="card-p">
-            <% for(let i = 0; i < isquerio.length; i++) { %>
 
-            <div class="card">
-                <p class="aa"><%=  isquerio[i].nome %></p>
+    <section class="produtos" style="background-color: rgb(27, 27, 27);">
+        <h1 class="tabaria-text" style="text-align: center;">Recem adicionados</h1>
+        <div class="card-p">
+            <% for(let i = 0; i < novos.length; i++) { %>
+
+            <div class="card"  style=" background-color: rgb(20, 20, 20); border-radius: 10px;">
+                <p class="aa"><%=  novos[i].nome %></p>
                 <div class="img-narga">
-                    <img src="<%=  isquerio[i].imagem %>" alt="">
+                    <img src="<%=  novos[i].imagem %>" alt="">
                 </div>
                 <div class="compra">
-                    <p class="preco">R$: <%=  isquerio[i].preco %>.00</p>
+                    <p class="preco">R$: <%=  novos[i].preco %>.00</p>
                     
-                    <a href="/produtos/<%=  isquerio[i].slug %>" style="text-decoration: none;">
+                    <a href="/produtos/<%=  novos[i].slug %>" style="text-decoration: none;">
                         <div class="bt-comprar">
                             <p>COMPRAR</p>
                         </div>
                     </a>
 
                     <div class="btn-add" >
-                        <p style="padding: 10px;" class="btn-ouvidor" id=' { "nome": "<%=  isquerio[i].nome %>", "slug": "<%= isquerio[i].slug %>", "imagem": "<%=  isquerio[i].imagem %>", "preco": <%=  isquerio[i].preco %> }'>ADICIONAR</p>
+                        <p style="padding: 10px;" class="btn-ouvidor" id=' { "nome": "<%=  novos[i].nome %>", "slug": "<%= novos[i].slug %>", "imagem": "<%=  novos[i].imagem %>", "preco": <%=  novos[i].preco %> }'>ADICIONAR</p>
                     </div>
 
                 </div>
@@ -72,6 +73,61 @@
             <% } %>
         </div>
     </section>
+
+    <section class="produtos" style="background-image: url(https://github.com/MiguelrSant/IMG/blob/main/5c8e3d13-d6f2-4671-9149-f6b5c4000373.png?raw=true); background-size: cover; background-repeat: no-repeat;">
+        <h1 class="tabaria-text" style="text-align: center;">Categorias</h1>
+        <div class="card-p">
+            <a href="/categoria/narguile" style="text-decoration: none;" >
+                <div class="card card-catgoria" style="border: 0;" >
+                    <p class="aa">Narguiles</p>
+                    <div class="img-narga">
+                        <img class="img-categoria" src="https://cdn.awsli.com.br/300x300/2540/2540835/produto/210301489/triton-viper-preto-en0re1dzpo.png" alt="">
+                    </div>
+                </div>
+            </a>
+            <a href="/categoria/vape" style="text-decoration: none;" >
+                <div class="card card-catgoria" style="border: 0;">
+                    <p class="aa">Vapes</p>
+                    <div class="img-narga">
+                        <img class="img-categoria" src="https://www.vapeshop.co.uk/cdn/shop/products/vaporesso-xros-mini-vape-kit-orange-red.png?height=1000&v=1671011063&width=1000" alt="">
+                    </div>
+                </div>
+            </a>
+            <a href="/categoria/isqueiro" style="text-decoration: none;" >
+                <div class="card card-catgoria" style="border: 0;" >
+                    <p class="aa">Isqueiros</p>
+                    <div class="img-narga">
+                        <img class="img-categoria" src="https://images.tcdn.com.br/img/img_prod/1146433/isqueiro_hiper_2225_1_0810b881165c4d5e0f3e2348e21e1490.png" alt="">
+                    </div>
+                </div>
+            </a>
+            <a href="/categoria/carv" style="text-decoration: none;" >
+                <div class="card card-catgoria" style="border: 0;">
+                    <p class="aa">Carvões</p>
+                    <div class="img-narga">
+                        <img class="img-categoria" src="https://tabacariasamir.com.br/loja/wp-content/uploads/2022/03/1419.jpg" alt="">
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section style="height: 230px;">
+        <div class="text-tabacaria" >
+            <h1 class="tabaria-texte">TABACARIA</h1>
+            <p style="color: white; text-align: center; padding-bottom: 7px;">Nossa tabacaria tem os melhores produtos e com o melhor <br> preço, compre logo o seu!</p>
+            <div class="btn-whatss">
+                <div class="img-whats">
+                    <img  src="https://github.com/MiguelrSant/IMG/blob/main/whatsapp-white.png?raw=true" alt="">
+                </div>
+            <a href="https://wa.me/5516993423284" target="_blank" style="text-decoration: none; color: black;">
+                <h3>COMPRAR</h3>
+            </a>
+                
+            </div>
+        </div>
+    </section>
+
 
 
     <script>
