@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/index.css?20221226_3">
+</head>
+<body>
+    <form action="/admin/cadastro" method="post" class="cadastro" >
+        <input type="text" name="titulo" id="" placeholder="Titulo" class="input-text-admin">
+        <input type="text" name="slug" id="" placeholder="Slug" class="input-text-admin">
+        <input type="text" name="imagem" id="" placeholder="Imagem" class="input-text-admin">
+        <input type="number" name="preco" id="" placeholder="Preço" class="input-text-admin">
+        <input type="submit" value="CADASTRAR!" class="input-submit-admin">
+    </form>
+    <header class="header-painel">
+        <h1>Meus Produtos</h1>
+    </header>
+    <div class="produtos">
+        <% for(let i = 0; i < produtos.length; i++) { %>
+
+            <div class="produto-single">
+                <h3>Titulo do produto: <%=  produtos[i].nome %></h3>
+                <h3><a href="/admin/deletar/<%=  produtos[i]._id %>" style="color: red; cursor: pointer; text-decoration: none;">(X) Excluir produto</a></h3>
+            </div>
+    
+         <% } %>
+        
+    </div>
+</body>
+</html>

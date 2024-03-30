@@ -15,29 +15,130 @@
     </div>
 
 </section>
+
     <section class="produtos">
-        <h1 class="tabaria-text">Produtos</h1>
+        <h1 class="tabaria-text">Vapes</h1>
         <div class="card-p">
-            <% for(let i = 0; i < produtos.length; i++) { %>
+            <% for(let i = 0; i < vapes.length; i++) { %>
 
             <div class="card">
-                <p class="aa"><%=  produtos[i].nome %></p>
+                <p class="aa"><%=  vapes[i].nome %></p>
                 <div class="img-narga">
-                    <img src="<%=  produtos[i].imagem %>" alt="">
+                    <img src="<%=  vapes[i].imagem %>" alt="">
                 </div>
                 <div class="compra">
-                    <p class="preco">R$: <%=  produtos[i].preco %>.00</p>
+                    <p class="preco">R$: <%=  vapes[i].preco %>.00</p>
                     
-                    <a href="/produtos/<%=  produtos[i].slug %>" style="text-decoration: none;">
+                    <a href="/produtos/<%=  vapes[i].slug %>" style="text-decoration: none;">
                         <div class="bt-comprar">
                             <p>COMPRAR</p>
                         </div>
                     </a>
+
+                    <div class="btn-add" >
+                        <p style="padding: 10px;" class="btn-ouvidor" id=' { "nome": "<%=  vapes[i].nome %>", "slug": "<%= vapes[i].slug %>", "imagem": "<%=  vapes[i].imagem %>", "preco": <%=  vapes[i].preco %> }'>ADICIONAR</p>
+                    </div>
+
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </section>
+    <section class="produtos">
+        <h1 class="tabaria-text">Isqueiro</h1>
+        <div class="card-p">
+            <% for(let i = 0; i < isquerio.length; i++) { %>
+
+            <div class="card">
+                <p class="aa"><%=  isquerio[i].nome %></p>
+                <div class="img-narga">
+                    <img src="<%=  isquerio[i].imagem %>" alt="">
+                </div>
+                <div class="compra">
+                    <p class="preco">R$: <%=  isquerio[i].preco %>.00</p>
+                    
+                    <a href="/produtos/<%=  isquerio[i].slug %>" style="text-decoration: none;">
+                        <div class="bt-comprar">
+                            <p>COMPRAR</p>
+                        </div>
+                    </a>
+
+                    <div class="btn-add" >
+                        <p style="padding: 10px;" class="btn-ouvidor" id=' { "nome": "<%=  isquerio[i].nome %>", "slug": "<%= isquerio[i].slug %>", "imagem": "<%=  isquerio[i].imagem %>", "preco": <%=  isquerio[i].preco %> }'>ADICIONAR</p>
+                    </div>
+
                 </div>
             </div>
             <% } %>
         </div>
     </section>
 
+
+    <script>
+         var carrinho = []
+        var local = JSON.parse(localStorage.getItem("carrinho"))
+        if(local != null){
+            carrinho = local
+        }
+
+        const elementosAdd = window.document.getElementsByClassName("btn-ouvidor")
+        for(var i = 0; i < elementosAdd.length; i++){
+            elementosAdd[i].addEventListener("click", function(){
+                var item = (JSON.parse(event.target.id))
+
+                window.alert(`O produto ${item.nome} foi adicionado no carrinho`)
+
+                var data = {
+                    quantidade: 1,
+                    produto: item.nome,
+                    preco: item.preco,
+                    imagem: item.imagem,
+                    slug: item.slug
+                }
+
+                function prod(pro){
+                    return pro.produto === item.nome
+                }
+
+                if(carrinho.find(prod) === undefined){
+                    carrinho.push(data)
+                    
+                    if(localStorage.hasOwnProperty("carrinho")){
+                        localStorage.removeItem("carrinho")
+                        localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                        var local = JSON.parse(localStorage.getItem("carrinho"))
+                    } else{
+                        localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                        var local = JSON.parse(localStorage.getItem("carrinho"))
+                    }
+
+
+
+                } else {
+                    const produtoExQN = carrinho.find(prod).quantidade
+                    const produtoNewQN = data.quantidade
+                    const newValueQN = produtoExQN + produtoNewQN
+                    const newValue =  { quantidade: newValueQN, produto: data.produto, preco: data.preco, imagem: data.imagem, slug: data.slug}
+                    
+
+                    function removeItem(arr, prop, value){
+                        return arr.filter(function(i) {return i[prop] !== value })
+                    }
+
+                    var carrinho2 = removeItem(carrinho, 'produto', data.produto)
+                    carrinho2.push(newValue)
+                    carrinho = carrinho2
+                    
+                    localStorage.removeItem("carrinho")
+                    localStorage.setItem("carrinho", JSON.stringify(carrinho))
+                    var local = JSON.parse(localStorage.getItem("carrinho"))
+                }
+
+
+            })
+        }
+      
+        
+    </script>
 </body>
 </html>

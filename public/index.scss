@@ -70,6 +70,16 @@ $container-s: 540px;
         @media screen and (max-width: 417px) {
           @content;
         }
+    }@else if $device == prod1{
+        // For resolutions less than 540px
+        @media screen and (max-width: 450px) {
+          @content;
+        }
+    }@else if $device == prod2{
+        // For resolutions less than 540px
+        @media screen and (max-width: 418px) {
+          @content;
+        }
     }
     
   }
@@ -97,11 +107,13 @@ body{
 }
 
 header{
-    position: absolute;
-    padding: 5px 0;
     width: 100%;
-    height: 50px;
+    height: 63px;
     z-index: 999;
+    background-color: rgb(31, 31, 31);
+    align-items: center;
+    text-align: center;
+    display: flex;
 }
 
 .max-header{
@@ -112,7 +124,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 15%;
+    padding: 0 15%;    
     
     @include responsive(s){
         padding: 0 5%;
@@ -126,6 +138,10 @@ header{
         img{
             width: 50px;
             height: 50px;
+        }
+
+        @include responsive((car2)){
+            display: none;
         }
     }
     .carrinho  a{
@@ -226,7 +242,7 @@ section.produtos{
         justify-content: space-evenly;
         flex-wrap: wrap;
         @include responsive(a){
-            padding: 0 10px;
+            padding: 0 0px;
             justify-content: space-evenly;
             
         }
@@ -234,23 +250,24 @@ section.produtos{
             display: flex;
             flex-direction: column;
             width: 210px;
-            height: 400px;
             border: 1px solid white;
             padding: 10px 0;
             color: white;
             margin-bottom: 15px;
             margin-left: 5px;
 
-            @include responsive(a){
-                width: 190px;
-                height: 380px;
-                
+            @include responsive(prod1){
+                    width: 195px;
             }
-            @include responsive(asss){
-                width: 270px;
-                height:410px;
-        
+            @include responsive(prod2){
+                width: 170px;
             }
+
+            .btn-add{
+                margin-left: 10px;
+            }
+
+
 
             p.aa{
                 font-family: "KoHo", sans-serif;
@@ -286,17 +303,6 @@ section.produtos{
                 align-items: center;
                 margin-left: 10px;
 
-                @include responsive(a){
-                    width: 120px;
-                    height: 30px;
-                    font-size: 15px;
-                }
-                @include responsive(asss){
-                    width: 150px;
-                    height: 50px;
-                    font-size: 20px;
-            
-                }
             }
         }
 
@@ -387,25 +393,25 @@ section.produto-single{
             border-radius: 5px;
             margin-top: 20px;
         }
-        .btn-add{
-            user-select: none;
-            cursor: pointer;
-            display: flex;
-            width: 140px;
-            height: 40px;
-            background-color: #c4c4c4;
-            color: black;
-            font-family: "KoHo", sans-serif;
-            font-weight: bolder;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
-            margin-top: 20px;
-            border: 0;
-        }
+
     }
 }
-
+.btn-add{
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    width: 140px;
+    height: 40px;
+    background-color: #c4c4c4;
+    color: black;
+    font-family: "KoHo", sans-serif;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    margin-top: 20px;
+    border: 0;
+}
 .qn{
     display: flex;
     width: 70px;
@@ -543,4 +549,110 @@ section.produto-single{
             font-family: "KoHo", sans-serif;
         }
     }
+}
+
+
+.form-login{
+    position: absolute;
+    left: 50%; 
+    transform: translateX(-50%);
+    top: 250px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+
+
+}
+
+.input-text{
+    height: 40px;
+    margin-bottom: 10px;
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    padding-left: 8px
+}
+.input-submit{
+    border: 0;
+    height: 30px;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .5s ease;
+
+    &:hover{
+        background-color: #919191
+    }
+}
+
+
+
+
+.header-painel{
+    width: 100%;
+    height: 50px;
+    background-color: #111111;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+}
+form.cadastro{
+
+    margin-top: 60px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+
+    .input-text-admin{
+        margin: 0 auto;
+        width: 500px;
+        height: 40px;
+        margin-bottom: 10px;
+        outline: 0;
+        border: 0;
+        border-radius: 5px;
+        padding-left: 8px
+    }
+    .input-submit-admin{
+        margin: 0 auto;
+        width: 500px;
+        border: 0;
+        height: 30px;
+        border-radius: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: .5s ease;
+    
+        &:hover{
+            background-color: #919191
+        }
+    }
+}
+
+.produtos{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 60px;
+    justify-content: space-between;
+    padding: 0 10px;
+    color: white;
+}
+
+.produto-single{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    border-bottom: 2px solid gray;
+}
+
+.busca{
+    border: 0;
+    outline: 0;
+    height: 35px;
+    padding-left: 7px;
+    border-radius: 5px;
 }
