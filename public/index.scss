@@ -104,9 +104,11 @@ $container-s: 540px;
 
 body{
     background-color: #151515;
+    overflow-x: hidden;
 }
 
 header{
+    position: fixed;
     width: 100%;
     height: 63px;
     z-index: 999;
@@ -114,9 +116,11 @@ header{
     align-items: center;
     text-align: center;
     display: flex;
+    top: 0;
 }
 
 .max-header{
+    position: fixed;
     max-width: 1440px;
     width: 100%;
     height: 50px;
@@ -125,6 +129,7 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 0 15%;    
+    z-index: 999;
     
     @include responsive(s){
         padding: 0 5%;
@@ -140,9 +145,6 @@ header{
             height: 50px;
         }
 
-        @include responsive((car2)){
-            display: none;
-        }
     }
     .carrinho  a{
         color: white;
@@ -242,7 +244,7 @@ section.produtos{
         justify-content: space-evenly;
         flex-wrap: wrap;
         @include responsive(a){
-            padding: 0 0px;
+            padding: 0px 3px 0 0px;
             justify-content: space-evenly;
             
         }
@@ -257,14 +259,12 @@ section.produtos{
             margin-left: 5px;
 
             @include responsive(prod1){
-                    width: 195px;
-            }
-            @include responsive(prod2){
-                width: 170px;
+                width: 45%;
             }
 
             .btn-add{
                 margin-left: 10px;
+                width: 90%;
             }
 
 
@@ -275,14 +275,24 @@ section.produtos{
                 font-size: 30px;
                 padding: 0;
                 text-transform: uppercase;
+                @include responsive(xs){
+                    font-size: 1.3em;
+                }
             }
             div.img-narga{
-                width: 170px;
-                height: 250px;
+                width: 100%;
+                height: 110%;
+                @include responsive(prod1){
+                    width: 74%;
+                    height: 94%;
+                }
+
                 margin: 0 auto;
                 img{
-                    width: 180px;
-                    height: 260px;
+                    width: 100%;
+                    height: 100%;
+                    max-height: 190px;
+                    max-width: 190px;
                 }
             }
             p.preco{
@@ -293,7 +303,7 @@ section.produtos{
             }
             div.bt-comprar{
                 display: flex;
-                width: 140px;
+                width: 90%;
                 height: 40px;
                 background-color: #EEB409;
                 color: black;
@@ -648,10 +658,10 @@ form.cadastro{
     padding-top: 12px;
 }
 
-.buscador i {
+.buscador i, .buscador2 i {
     position: absolute;
     padding-left: 8px;
-    top:21px;
+    top:15px;
     color:gray;
     font-size: 20px;
 }
@@ -723,5 +733,132 @@ h1.tabaria-texte{
         filter: brightness(10%);
         margin-left: 15px;
         margin-top: 7px;
+    }
+}
+
+.bx{
+    display: none;
+}
+nav.sub-menu{
+    display: none;
+}
+
+
+@media (max-width: 920px){
+    div.carrinho{
+        display: none;
+    }
+    .buscador{
+        display: none;
+    }
+
+    .bx {
+        display: block;
+        width: 50px;
+        height: 50px;
+        position: relative;
+        cursor: pointer;
+    
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 57%;
+            left: 12%;
+            width: 75%;
+            height: 2px;
+            border-radius: 2px;
+            background-color: rgb(255, 255, 255);
+            transition: 1s ease;
+          }
+    
+          &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 33%;
+            left: 12%;
+            width: 75%;
+            height: 2px;
+            border-radius: 2px;
+            background-color: rgb(255, 255, 255);
+            transition: 1s ease;
+          }
+    }
+    
+    
+    
+    .bx-active{
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 55%;
+            left: 15%;
+            width: 75%;
+            height: 2px;
+            border-radius: 2px;
+            background-color: rgb(255, 255, 255);
+            transform: rotate(220deg);
+            
+          }
+    
+          &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 57%;
+            left: 12%;
+            width: 75%;
+            height: 2px;
+            border-radius: 2px;
+            background-color: rgb(255, 255, 255);
+            transform: rotate(-220deg);
+          }
+    }
+
+
+    nav.sub-menu{
+        display: block;
+        z-index: 990;
+        transition: .7s ease;
+        position: absolute;
+        top: -700px;
+        width: 100%;
+        height: 300px;
+        background-color: rgb(31, 31, 31);
+    
+        .nav-menu-mobile{
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+    
+            li{
+                margin: 0 auto;
+                width: 98%;
+                border-bottom: 1px solid gray;
+                display: flex;
+                align-items: center;
+    
+                h2{
+                    color: white;
+                    margin-left: 5px;
+                }
+                .buscador2 {
+                    padding-bottom: 7px;
+                    input{
+                        margin-top: 7px;
+                        width: 90%;
+                    }
+                }
+                
+    
+            }
+        }
+    }
+
+    .sub-menu.active{
+        top: 60px;
     }
 }
